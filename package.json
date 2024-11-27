@@ -1,0 +1,22 @@
+{
+  "name": "globtecx-geek",
+  "version": "1.0.0",
+  "description": "Catalogo de productos",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "json-server --watch db.json --port 3001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yber-M/GlobTecx-Geek.git"
+  },
+  "author": "Yb-M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yber-M/GlobTecx-Geek/issues"
+  },
+  "homepage": "https://github.com/Yber-M/GlobTecx-Geek#readme",
+  "dependencies": {
+    "json-server": "^0.17.3"
+  }
+}
