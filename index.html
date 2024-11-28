@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <title>GLOBTECx Geek</title>
-    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logoRedondeado.png">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Parkinsans:wght@300..800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <h1>Hello World!</h1>
+    <header class="header">
+        <div class="header__logo">
+            <img src="./img/LogoSinLetras.png" alt="GlobTecx-Geek" class="header__logo__img">
+            <h1 class="header__logo__titulo">GLOBTECx-</h1>
+        </div>
+        <div class="header__search">
+            <input type="text" placeholder="Buscar productos" class="header__search__input">
+            <button class="header__search__button">
+                <i class='bx bx-search-alt'></i>
+            </button>
+        </div>
+        <div class="header__options">
+            <button class="header__options__user"><i class='bx bxs-user-circle'></i> <span> Hola, Yb-M</span></button>
+            <button class="header__options__login"><i class='bx bx-log-out' ></i></button>
+        </div>
+    </header>
 
     <script src="js/conexApi.js"></script>
 </body>
+
 </html>
