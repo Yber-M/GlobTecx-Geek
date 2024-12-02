@@ -91,6 +91,7 @@ body {
     font-size: 25px;
     vertical-align: bottom;
 }
+
 .header__options__login i {
     color: #39c364;
     font-size: 25px;
@@ -100,6 +101,7 @@ body {
 /* main style general */
 main {
     display: flex;
+    flex-direction: column;
     background-color: #f9f9f9;
 }
 
@@ -159,3 +161,96 @@ main {
     right: 0px;
 }
 
+/* OjO -> Seccion Productos */
+.productos {
+    padding: 2rem 10rem;
+    background-color: #f1f1f1;
+    color: #222222;
+}
+
+.productos__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+/* ? tarjetas de producto */
+.card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ? contenido de la tarjeta */
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 1px solid #39c364;
+}
+
+.card__content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card__marca {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #39c364;
+    font-family: 'Fira Code', sans-serif;
+}
+
+.card__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card__details {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card__price--old {
+    font-size: 0.9rem;
+    text-decoration: line-through;
+    color: #757575;
+}
+
+.card__dsct {
+    font-size: 0.9rem;
+    color: white;
+    background-color: red;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.card__button {
+    margin-top: auto;
+    padding: 10px 15px;
+    background-color: #222222;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.card__button:hover {
+    background-color: #39c364;
+    transform: scale(1.05);
+}
