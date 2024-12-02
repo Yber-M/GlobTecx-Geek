@@ -1,0 +1,141 @@
+body {
+    font-family: "Parkinsans";
+    margin: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.video__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video__fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login__logo {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.login__logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
+}
+
+.login__logo-text {
+    font-family: 'Fira Code', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.login__container {
+    background-color: rgba(65, 65, 65, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgb(255, 255, 255, 0.3);
+}
+
+.login__titulo {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #23ff69;
+    font-weight: bold;
+}
+
+.login__formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login__campo {
+    text-align: left;
+    color: #ddd;
+    font-weight: bold;
+}
+
+.login__campo label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #23ff69;
+}
+
+.login__campo input {
+    font-family: 'Fira Code', sans-serif;
+    width: 95.7%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #222;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.login__campo input:focus {
+    outline: none;
+    border-color: #23ff69;
+}
+
+.login__boton {
+    font-family: 'Fira Code', sans-serif;
+    background-color: #222;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+
+.login__boton:hover {
+    background-color: #23ff69;
+    color: #2c2c2c;
+}
+
+.login__registrarse {
+    font-family: 'Fira Code', sans-serif;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.login__registrarse a {
+    font-weight: bold;
+    color: #23ff69;
+}
+
+.login__registrarse a:hover {
+    text-decoration: underline;
+}
