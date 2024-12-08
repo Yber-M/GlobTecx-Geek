@@ -28,3 +28,26 @@ async function iniciarSesion(event) {
 
 // Escuchar el evento submit
 loginForm.addEventListener('submit', iniciarSesion);
+
+// Logica para alternar los formularios
+document.addEventListener('DOMContentLoaded', () => {
+    const loginContainer = document.querySelector('.login__container.loguearse');
+    const registerContinaer = document.querySelector('.login__container.register');
+    const toggleLinks = document.querySelectorAll('[data-toggle]');
+
+    toggleLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const target = link.getAttribute("data-toggle");
+
+            if (target === 'register') {
+                loginContainer.classList.remove('active');
+                registerContinaer.classList.add('active');
+            } else if (target === 'login') {
+                loginContainer.classList.add('active');
+                registerContinaer.classList.remove('active');
+            }
+        });
+    });
+});
