@@ -9,8 +9,21 @@ async function listarProductos() {
     return convertirConexion;
 }
 
+// Obtener usuarios desde la API
+export async function obtenerUsuarios() {
+    try {
+        const response = await fetch('http://localhost:3001/users');
+        return response.json();
+    } catch (error) {
+        console.log('Error al obtener usuarios: ', error);
+        alert('No se pudo conectar con la base de datos de usuarios')
+        return[];
+    }
+}
+
 export const conexApi = {
     listarProductos,
+    obtenerUsuarios
 }
 
 listarProductos();
