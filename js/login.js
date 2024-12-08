@@ -1,15 +1,21 @@
 import { conexApi } from "./conexApi.js";
+import { registrarUsuario } from "./conexApi.js";
 
-const loginForm = document.querySelector('.login__formulario');
-const emailInput = document.querySelector('#email');
-const passwordInput = document.querySelector('#password');
+// Selección de formularios
+const loginForm = document.querySelector('#loginForm');
+const registerForm = document.querySelector('#registerForm');
 
-// Funcion iniciar sesio
+// Selección de inputs de login
+const emailInput = document.querySelector('#email-login');
+const passwordInput = document.querySelector('#password-login');
+
+// Función para iniciar sesión
 async function iniciarSesion(event) {
     event.preventDefault();
+    console.log("Formulario de Login enviado, event.preventDefault() ejecutado");
 
-    const email = emailInput.value;
-    const password = passwordInput.value;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
     const users = await conexApi.obtenerUsuarios();
 
@@ -19,20 +25,108 @@ async function iniciarSesion(event) {
 
     if (user) {
         localStorage.setItem('firstName', JSON.stringify(user));
-        alert(`Bienvenido, ${user.firstName}!`);
         window.location.href = '../index.html';
     } else {
-        alert('Credenciales Inválidas. Intente nuevamente...');
+        textErrorLogin('Credenciales Inválidas');
     }
 }
 
-// Escuchar el evento submit
-loginForm.addEventListener('submit', iniciarSesion);
+async function manejarRegistro(event) {
+    event.preventDefault();
 
-// Logica para alternar los formularios
+    const firstName = document.querySelector('#firstName').value.trim();
+    const lastName = document.querySelector('#lastName').value.trim();
+    const email = document.querySelector('.register #email-register').value.trim();
+    const password = document.querySelector('.register #password-register').value.trim();
+    const confirmPassword = document.querySelector('.register #confirm-password').value.trim();
+
+    // Validar campos
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        textErrorRegister('Completo todos los campos.');
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        textErrorRegister('Contraseñas diferentes.');
+        return;
+    }
+
+    // Mostrar el mensaje de registro exitoso
+    usuarioRegistradoText('¡Registro exitoso!');
+
+    // Esperar a que el mensaje termine antes de registrar al usuario (por ejemplo, 3 segundos)
+    setTimeout(async () => {
+        const nuevoUsuario = {
+            firstName,
+            lastName,
+            email,
+            password,
+        };
+
+        try {
+            const usuarioRegistrar = await registrarUsuario(nuevoUsuario);
+
+            if (usuarioRegistrar) {
+                usuarioRegistradoText('Registro con exitoso!');
+                // Redirigir después de 2 segundos
+                setTimeout(() => {
+                    window.location.href = './login.html';
+                }, 2000);
+            }
+        } catch (error) {
+            console.log('Error al registrar usuario.', error);
+            textErrorRegister('Error al registrarse.');
+        }
+    }, 5200); // Tiempo para mostrar el mensaje inicial
+}
+
+
+
+// Función de mensajes
+function textErrorLogin(cadena) {
+    new Typed('#typed-login', {
+        strings: [`${cadena}`, 'Inténtalo nuevamente...', 'GLOBTECx-'],
+        typeSpeed: 50,
+        backSpeed: 15,
+        cursorChar: '',
+        loop: false,
+    });
+}
+
+function textErrorRegister(cadena) {
+    new Typed('#typed-register', {
+        strings: [`${cadena}`, 'Inténtalo nuevamente...', 'GLOBTECx-'],
+        typeSpeed: 50,
+        backSpeed: 15,
+        cursorChar: '',
+        loop: false,
+    });
+}
+
+function usuarioRegistradoText(cadena) {
+    new Typed('#typed-register', {
+        strings: [`${cadena}`, 'Redireccionando al login...'], 
+        typeSpeed: 45,
+        backSpeed: 25,
+        cursorChar: '',
+        loop: false,
+    });
+}
+
+
+// Asociar eventos a formularios
+if (loginForm) {
+    loginForm.addEventListener('submit', iniciarSesion);
+}
+
+if (registerForm) {
+    registerForm.addEventListener('submit', manejarRegistro);
+}
+
+// Lógica para alternar formularios
 document.addEventListener('DOMContentLoaded', () => {
     const loginContainer = document.querySelector('.login__container.loguearse');
-    const registerContinaer = document.querySelector('.login__container.register');
+    const registerContainer = document.querySelector('.login__container.register');
     const toggleLinks = document.querySelectorAll('[data-toggle]');
 
     toggleLinks.forEach((link) => {
@@ -43,10 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (target === 'register') {
                 loginContainer.classList.remove('active');
-                registerContinaer.classList.add('active');
+                registerContainer.classList.add('active');
             } else if (target === 'login') {
                 loginContainer.classList.add('active');
-                registerContinaer.classList.remove('active');
+                registerContainer.classList.remove('active');
             }
         });
     });

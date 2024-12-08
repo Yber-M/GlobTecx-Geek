@@ -21,6 +21,25 @@ export async function obtenerUsuarios() {
     }
 }
 
+export async function registrarUsuario(nuevoUsuario) {
+    try {
+        const response = await fetch('http://localhost:3001/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoUsuario),
+        });
+
+        if (!response.ok) {
+            throw new error('No se pudo registrar el usuario. Verifique la conexión.')
+        }
+    } catch (error) {
+        console.log('Error al registrar nuevo usuario', error);
+        alert('Error al registrar el usuario. Intentelo nuevamente.');
+    }
+}
+
 export const conexApi = {
     listarProductos,
     obtenerUsuarios
