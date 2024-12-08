@@ -5,9 +5,7 @@ async function listarProductos() {
         throw new Error('Error al conectar con la API');
     }
     const convertirConexion = await conectar.json();
-    
-    console.log("Productos obtenidos:", convertirConexion);
-    
+        
     return convertirConexion;
 }
 

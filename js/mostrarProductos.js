@@ -1,7 +1,6 @@
 import { conexApi } from "./conexApi.js";
 
 const list = document.querySelector('[data-productos]');
-console.log("Contenedor encontrado>", list);
 
 export function crearCard(imagen, marca, titulo, precioActual, dsct, precioAnterior, linkProducto) {
     const producto = document.createElement('div');
@@ -26,7 +25,6 @@ export function crearCard(imagen, marca, titulo, precioActual, dsct, precioAnter
 async function listarProductos() {
     try {
         const producApi = await conexApi.listarProductos();
-        console.log("Datos obtenidos de la API:", producApi);
 
         producApi.forEach((producto) => {
             const card = crearCard(
@@ -38,7 +36,6 @@ async function listarProductos() {
                 producto.precioAnterior,
                 producto.linkProducto
             );
-            console.log("Tarjeta creada:", card);
             list.appendChild(card);
         });
     } catch (error) {
