@@ -96,6 +96,7 @@ body {
     color: #39c364;
     font-size: 25px;
     vertical-align: bottom;
+    display: none;
 }
 
 /* main style general */
