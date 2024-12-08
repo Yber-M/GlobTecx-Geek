@@ -12,11 +12,38 @@ function moverSlider(index) {
     sliderContainer.style.transform = `translateX(${offset}px)`;
 }
 
-btnLeft.addEventListener('click', ()=> {
+btnLeft.addEventListener('click', () => {
     currentIndex = (currentIndex === 0) ? totalItems - 1 : currentIndex - 1;
     moverSlider(currentIndex);
 });
-btnRight.addEventListener('click', ()=> {
+btnRight.addEventListener('click', () => {
     currentIndex = (currentIndex === totalItems - 1) ? 0 : currentIndex + 1;
     moverSlider(currentIndex);
+});
+
+// Logica de logueo
+document.addEventListener('DOMContentLoaded', () => {
+    const userButton = document.querySelector('.header__options__user')
+    const userElmA = document.querySelector('.header__options__action');
+    const logoutButton = document.querySelector('.header__options__login');
+    const spanText = userButton.querySelector('span');
+
+    const user = JSON.parse(localStorage.getItem('firstName'));
+
+    if (user) {
+        // Actualizamos la interfaz para un usuario logueado
+        spanText.textContent = `Bienvenido, ${user.firstName}!`;
+        userElmA.removeAttribute('href');
+        logoutButton.style.display = 'inline-block';
+
+        userElmA.addEventListener('click', () => {
+            window.location.href = 'pages/agregar.html';
+        });
+    }
+
+    // Logica para cerrar sesion
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem('firstName');
+        window.location.reload();
+    });
 });

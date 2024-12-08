@@ -91,12 +91,13 @@ body {
     font-size: 25px;
     vertical-align: bottom;
 }
-
+.header__options__login {
+    display: none;
+}
 .header__options__login i {
     color: #39c364;
     font-size: 25px;
     vertical-align: bottom;
-    display: none;
 }
 
 /* main style general */
