@@ -51,36 +51,42 @@ async function manejarRegistro(event) {
         return;
     }
 
-    // Mostrar el mensaje de registro exitoso
-    usuarioRegistradoText('¡Registro exitoso!');
+    try {
+        const users = await conexApi.obtenerUsuarios();
+        const emailExiste = users.some((user) => user.email === email);
 
-    // Esperar a que el mensaje termine antes de registrar al usuario (por ejemplo, 3 segundos)
-    setTimeout(async () => {
-        const nuevoUsuario = {
-            firstName,
-            lastName,
-            email,
-            password,
-        };
+        if (emailExiste) {
+            textErrorRegister('Email ya registrado.');
+            return;
+        }
 
-        try {
+        // Mostrar el mensaje de registro exitoso
+        usuarioRegistradoText('¡Registro exitoso!');
+
+        // Esperar a que el mensaje termine antes de registrar al usuario (por ejemplo, 3 segundos)
+        setTimeout(async () => {
+            const nuevoUsuario = {
+                firstName,
+                lastName,
+                email,
+                password,
+            };
+
             const usuarioRegistrar = await registrarUsuario(nuevoUsuario);
 
             if (usuarioRegistrar) {
-                usuarioRegistradoText('Registro con exitoso!');
+                usuarioRegistradoText('Registro exitoso!');
                 // Redirigir después de 2 segundos
                 setTimeout(() => {
                     window.location.href = './login.html';
                 }, 2000);
             }
-        } catch (error) {
-            console.log('Error al registrar usuario.', error);
-            textErrorRegister('Error al registrarse.');
-        }
-    }, 5200); // Tiempo para mostrar el mensaje inicial
+        }, 5200); // Tiempo para mostrar el mensaje inicial
+    } catch (error) {
+        console.log('Error al registrar usuario.', error);
+        textErrorRegister('Error al registrarse.');
+    }
 }
-
-
 
 // Función de mensajes
 function textErrorLogin(cadena) {
@@ -105,14 +111,13 @@ function textErrorRegister(cadena) {
 
 function usuarioRegistradoText(cadena) {
     new Typed('#typed-register', {
-        strings: [`${cadena}`, 'Redireccionando al login...'], 
+        strings: [`${cadena}`, 'Redireccionando al login...'],
         typeSpeed: 45,
         backSpeed: 25,
         cursorChar: '',
         loop: false,
     });
 }
-
 
 // Asociar eventos a formularios
 if (loginForm) {
