@@ -9,10 +9,16 @@ body {
 
 /* OjO -> HEADER */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     display: flex;
     align-items: center;
     padding: 10px 20px;
     background: #222222;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     justify-content: space-evenly;
 }
 
@@ -103,6 +109,7 @@ body {
 
 /* main style general */
 main {
+    margin-top: 67px;
     display: flex;
     flex-direction: column;
     background-color: #f9f9f9;
