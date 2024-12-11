@@ -2,6 +2,7 @@ const sliderContainer = document.querySelector('.slider__container');
 const sliderItems = document.querySelectorAll('.slider__item');
 const btnLeft = document.querySelector('.slider__button--left');
 const btnRight = document.querySelector('.slider__button--right');
+const logo = document.querySelector('.header__logo');
 
 let currentIndex = 0;
 const totalItems = sliderItems.length;
@@ -19,6 +20,10 @@ btnLeft.addEventListener('click', () => {
 btnRight.addEventListener('click', () => {
     currentIndex = (currentIndex === totalItems - 1) ? 0 : currentIndex + 1;
     moverSlider(currentIndex);
+});
+
+logo.addEventListener('click', () => {
+    window.location.href = './index.html';
 });
 
 // Logica de logueo
