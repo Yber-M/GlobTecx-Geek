@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/productos.css">
 
-
-    <title>Agregar Productos | GLOBTECx</title>
+    <title>Gestionar Productos | GLOBTECx</title>
     <link rel="shortcut icon" href="../img/logoRedondeado.png">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -17,7 +17,94 @@
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Parkinsans:wght@300..800&display=swap"
         rel="stylesheet">
 </head>
+
 <body>
-    <h1>Agregar Productos</h1>
+    <header class="header">
+        <div class="header__logo">
+            <img src="../img/LogoSinLetras.png" alt="GlobTecx-Geek" class="header__logo__img" height="32px">
+            <h1>GLOBTECx- Geek</h1>
+        </div>
+
+        <nav class="header__nave">
+            <a href="../index.html" class="header__link">
+                <i class='bx bx-home'></i> Volver al Inicio
+            </a>
+            <button class="header__logout">
+                <i class='bx bx-log-out'></i> Cerrar Sesión
+            </button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Sección de productos -->
+        <section class="productos">
+            <div class="productos__buscador">
+                <input type="text" id="buscarProducto" class="productos__input"
+                    placeholder="Ingresar producto por título">
+                <button id="buscarBtn" class="productos__buscar">
+                    <i class='bx bx-search'></i>
+                </button>
+            </div>
+
+            <div class="productos__lista" id="productoLista">
+
+            </div>
+        </section>
+
+        <!-- Sección de gestión de productos -->
+        <section class="gestionar">
+            <h2 class="gestionar__titulo">GESTIONAR PRODUCTOS</h2>
+            <form class="gestionar__formulario" id="formularioProducto">
+                <div class="gestionar__campo">
+                    <label for="id">ID</label>
+                    <input type="text" id="id" name="id" placeholder="N°" required>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="marca">Titulo</label>
+                    <input type="text" id="Titulo" name="titulo" placeholder="Ingresar el título del producto" required>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="precio">Precio</label>
+                    <input type="number" step="0.01" id="precio" name="precio" placeholder="99.9" required>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="descuento">Descuento</label>
+                    <input type="number" id="descuento" name="descuento" placeholder="1 - 90" required>
+                    <button type="button" id="calcularDescuento">Calcular Dsct.</button>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="precioFinal">Precio Final</label>
+                    <input type="number" id="precioFinal" name="precioFinal" placeholder="99.9" readonly>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="urlProducto">URL de Producto</label>
+                    <input type="url" id="urlProducto" name="urlProducto"
+                        placeholder="https://example.com/example-titulo" required>
+                </div>
+                <div class="gestionar__campo">
+                    <label for="urlImagen">URL de Imagen</label>
+                    <input type="url" id="urlImagen" name="urlImagen" placeholder="https://example.com/image.webp"
+                        required>
+                    <button type="button" id="vistaPreviaBtn">Vista Previa</button>
+                </div>
+                <div class="gestionar__vista">
+                    <img src="../assets/Vector.svg" id="vistaPrevia" alt="vistaPrevia"><br>
+                    <spam class="vistaPrevia__texto">Vista Previa</spam>
+                </div>
+                <div class="gestionar__botones">
+                    <button type="button" id="agregarBtn" class="btn btn--verde">
+                        <i class='bx bx-plus'></i>
+                    </button>
+                    <button type="button" id="guardarBtn" class="btn btn--azul">
+                        <i class='bx bx-save'></i>
+                    </button>
+                    <button type="button" id="eliminarBtn" class="btn btn--rojo">
+                        <i class='bx bx-trash'></i>
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
+
 </html>
