@@ -1,9 +1,10 @@
 import { conexApi } from "./conexApi.js";
-import { crearCard } from "./mostrarProductosCrud.js";
+import { crearCard, listaProductos } from "./mostrarProductosCrud.js";
 
 const searchButton = document.querySelector('#buscarBtn');
 const searchInput = document.querySelector('#buscarProducto');
 const productosContainer = document.querySelector('[data-productos]');
+const reloadButton = document.querySelector('#reloadBtn');
 
 async function filtrarProductos() {
     const query = searchInput.value.trim().toLowerCase();
@@ -20,6 +21,7 @@ async function filtrarProductos() {
             throw new Error('Error al conectar con la API');
         }
 
+        activarBtnReload();
         const productosFiltrados = await response.json();
 
         productosContainer.innerHTML = '';
@@ -46,6 +48,22 @@ async function filtrarProductos() {
     }
 
 }
+
+function activarBtnReload() {
+    reloadButton.style.display = 'block';
+}
+
+function desactivarBtnReload() {
+    reloadButton.style.display = 'none';
+    searchInput.value = '';
+    productosContainer.innerHTML = '';
+}
+
+reloadButton.addEventListener('click', () =>{
+    desactivarBtnReload();
+    listaProductos(crearCard);
+});
+
 // Detectar enter y clic
 searchButton.addEventListener('click', filtrarProductos);
 

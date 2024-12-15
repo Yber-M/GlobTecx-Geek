@@ -20,7 +20,7 @@ export function crearCard(imagen, marca, titulo, precioActual, dsct, precioAnter
     return producto;
 }
 
-async function listaProductos(callbackCrearCard) {
+export async function listaProductos(callbackCrearCard) {
     try {
         const productos = await conexApi.listarProductos();
 
