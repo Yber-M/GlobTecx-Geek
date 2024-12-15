@@ -1,5 +1,4 @@
 import { conexApi } from "./conexApi.js";
-import { registrarUsuario } from "./conexApi.js";
 
 // Selección de formularios
 const loginForm = document.querySelector('#loginForm');
@@ -72,7 +71,7 @@ async function manejarRegistro(event) {
                 password,
             };
 
-            const usuarioRegistrar = await registrarUsuario(nuevoUsuario);
+            const usuarioRegistrar = await conexApi.registrarUsuario(nuevoUsuario);
 
             if (usuarioRegistrar) {
                 usuarioRegistradoText('Registro exitoso!');

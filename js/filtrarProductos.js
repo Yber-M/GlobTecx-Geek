@@ -5,7 +5,6 @@ const searchButton = document.querySelector('#searchButton');
 const searchInput = document.querySelector('#searchInput');
 const productosContainer = document.querySelector('[data-productos]');
 
-
 async function filtrarProductos() {
     const query = searchInput.value.trim().toLowerCase();
 
@@ -15,19 +14,13 @@ async function filtrarProductos() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3001/productos?q=${query}`);
-
-        if (!response.ok) {
-            throw new Error('Error al conectar con la API');
-        }
-
-        const productoFiltrado = await response.json();
+        // Usamos la función buscarProductos de conexApi
+        const productoFiltrado = await conexApi.buscarProductos(query);
 
         productosContainer.innerHTML = ''; // Limpiamos los productos anteriores
 
-
         if (productoFiltrado.length === 0) {
-            productosContainer.innerHTML = `<span class="card__title">No se encontraron productos:(</span>`;
+            productosContainer.innerHTML = `<span class="card__title">No se encontraron productos :(</span>`;
         } else {
             productoFiltrado.forEach(producto => {
                 const card = crearCard(
@@ -42,12 +35,10 @@ async function filtrarProductos() {
                 productosContainer.appendChild(card);
             });
         }
-
     } catch (error) {
         console.error('Error al buscar un producto: ', error);
         productosContainer.innerHTML = `<span class="card__title">Hubo un error al realizar la búsqueda. Por favor, inténtalo nuevamente.</span>`;
     }
-
 }
 
 searchButton.addEventListener('click', filtrarProductos);

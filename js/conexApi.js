@@ -1,5 +1,7 @@
+const conexion = 'http://localhost:3001';
+
 async function listarProductos() {
-    const conectar = await fetch('http://localhost:3001/productos');
+    const conectar = await fetch(conexion + `/productos`);
     
     if (!conectar.ok) {
         throw new Error('Error al conectar con la API');
@@ -10,9 +12,9 @@ async function listarProductos() {
 }
 
 // Obtener usuarios desde la API
-export async function obtenerUsuarios() {
+async function obtenerUsuarios() {
     try {
-        const response = await fetch('http://localhost:3001/users');
+        const response = await fetch(conexion + '/users');
         return response.json();
     } catch (error) {
         console.log('Error al obtener usuarios: ', error);
@@ -21,9 +23,9 @@ export async function obtenerUsuarios() {
     }
 }
 
-export async function registrarUsuario(nuevoUsuario) {
+async function registrarUsuario(nuevoUsuario) {
     try {
-        const response = await fetch('http://localhost:3001/users', {
+        const response = await fetch(conexion +'/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,9 +42,27 @@ export async function registrarUsuario(nuevoUsuario) {
     }
 }
 
+async function buscarProductos(palabraClave) {
+    try {
+        const conex = await fetch(`${conexion}/productos?q=${palabraClave}`);
+        if (!conex.ok) {
+            throw new Error('Error al conectar con la API');
+        }
+        
+        const conexionConvert = conex.json();
+        return conexionConvert;
+        
+    } catch (error) {
+        console.error('Error en buscarProductos: ', error);
+        throw error;
+    }
+}
+
 export const conexApi = {
     listarProductos,
-    obtenerUsuarios
+    obtenerUsuarios,
+    registrarUsuario,
+    buscarProductos
 }
 
 listarProductos();

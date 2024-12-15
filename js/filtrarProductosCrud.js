@@ -15,16 +15,12 @@ async function filtrarProductos() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3001/productos?q=${query}`);
-
-        if (!response.ok) {
-            throw new Error('Error al conectar con la API');
-        }
-
-        activarBtnReload();
-        const productosFiltrados = await response.json();
+        const productosFiltrados = await conexApi.buscarProductos(query);
 
         productosContainer.innerHTML = '';
+
+        activarBtnReload();
+
 
         if (productosFiltrados.length === 0) {
             productosContainer.innerHTML = `<span class="producto-card__titulo">No se encontraron productos :(</span>`;
