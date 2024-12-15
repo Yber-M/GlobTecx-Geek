@@ -20,10 +20,10 @@
 
 <body>
     <header class="header">
-        <div class="header__logo">
+        <a class="header__logo" href="agregar.html">
             <img src="../img/LogoSinLetras.png" alt="GlobTecx-Geek" class="header__logo__img">
             <h1>GLOBTECx-</h1>
-        </div>
+        </a>
 
         <nav class="header__nave">
             <a href="../index.html" class="header__link">
@@ -46,9 +46,8 @@
                 </button>
             </div>
 
-            <div class="productos__lista" id="productoLista">
+            <div class="productos__lista" id="productoLista" data-productos></div>
 
-            </div>
         </section>
 
         <!-- Sección de gestión de productos -->
@@ -116,10 +115,13 @@
                             <i class='bx bx-trash'></i>
                         </button>
                     </div>
-                </div>                
+                </div>
             </form>
         </section>
     </main>
+
+    <script type="module" src="../js/mostrarProductosCrud.js"></script>
+    <script type="module" src="../js/filtrarProductosCrud.js"></script>
 </body>
 
 </html>
