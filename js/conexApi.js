@@ -1,4 +1,4 @@
-const conexion = 'http://localhost:3001';
+const conexion = 'https://apiglobtecxgeek.onrender.com';
 
 async function listarProductos() {
     const conectar = await fetch(conexion + `/productos`);
