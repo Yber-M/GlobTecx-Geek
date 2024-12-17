@@ -24,7 +24,9 @@ export async function listaProductos(callbackCrearCard) {
     try {
         const productos = await conexApi.listarProductos();
 
-        productos.forEach((producto) => {
+        const productoInvertido = productos.reverse();
+
+        productoInvertido.forEach((producto) => {
             const card = callbackCrearCard(
                 producto.id,
                 producto.imagen,
