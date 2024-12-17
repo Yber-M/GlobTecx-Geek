@@ -28,12 +28,14 @@ async function filtrarProductos() {
         } else {
             productosFiltrados.forEach(producto => {
                 const card = crearCard(
+                    producto.id,
                     producto.imagen,
+                    producto.linkProducto,
                     producto.marca,
                     producto.titulo,
                     producto.precioActual,
                     producto.dsct,
-                    producto.precioAnterior
+                    producto.precioAnterior,
                 );
                 productosContainer.appendChild(card);
             });
@@ -55,7 +57,7 @@ function desactivarBtnReload() {
     productosContainer.innerHTML = '';
 }
 
-reloadButton.addEventListener('click', () =>{
+reloadButton.addEventListener('click', () => {
     desactivarBtnReload();
     listaProductos(crearCard);
 });
