@@ -2,6 +2,15 @@ import { conexApi } from "./conexApi.js";
 
 const listarProductos = document.querySelector('[data-productos]');
 
+// Seleccionar los inputs del formulario
+const idInput = document.querySelector('#id');
+const tituloInput = document.querySelector('#titulo');
+const precioInput = document.querySelector('#precio');
+const descuentoInput = document.querySelector('#descuento');
+const precioFinalInput = document.querySelector('#precioFinal');
+const urlProductoInput = document.querySelector('#urlProducto');
+const urlImagenInput = document.querySelector('#urlImagen');
+
 export function crearCard(id, imagen, linkProducto, marca, titulo, precioActual, dsct, precioAnterior) {
     const producto = document.createElement('div');
     producto.classList.add('producto-card');
@@ -17,7 +26,36 @@ export function crearCard(id, imagen, linkProducto, marca, titulo, precioActual,
             </div>
             <button class="producto-card__btn" data-gestionar>Gestionar producto</button>
         </div>`;
+
+    // Evento para el boton Gestionar Productos
+    const gestionarBtn = producto.querySelector('[data-gestionar]');
+    gestionarBtn.addEventListener('click', () => {
+        cargarFormulario({
+            id,
+            titulo,
+            precioActual,
+            dsct,
+            precioAnterior,
+            imagen,
+            linkProducto
+        });
+    });
+
     return producto;
+}
+
+function cargarFormulario(producto) {
+    // Eliminar comas del precio y convertirlo a número
+    const precioAnteriorLimpio = parseFloat(producto.precioAnterior.replace(/,/g, ''));
+    const precioFinalLimpio = parseFloat(producto.precioActual.replace(/,/g, ''));
+
+    idInput.value = producto.id;
+    tituloInput.value = producto.titulo;
+    precioInput.value = precioAnteriorLimpio;
+    descuentoInput.value = producto.dsct;
+    precioFinalInput.value = precioFinalLimpio;
+    urlProductoInput.value = producto.linkProducto;
+    urlImagenInput.value = producto.imagen;
 }
 
 export async function listaProductos(callbackCrearCard) {
