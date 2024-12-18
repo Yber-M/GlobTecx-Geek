@@ -11,7 +11,6 @@ async function listarProductos() {
     return convertirConexion;
 }
 
-// Obtener usuarios desde la API
 async function obtenerUsuarios() {
     try {
         const response = await fetch(conexion + '/users');
@@ -43,7 +42,6 @@ async function registrarUsuario(nuevoUsuario) {
 }
 
 async function registrarProducto(producto) {
-    console.log("Enviando POST a la API con producto:", producto);
     try {
         const response = await fetch(conexion + '/productos', {
             method: 'POST',
@@ -51,14 +49,11 @@ async function registrarProducto(producto) {
             body: JSON.stringify(producto),
         });
 
-        console.log("Respuesta de la API:", response);
-
         if (!response.ok) {
             throw new Error('No se pudo registrar el producto');
         }
 
         const data = await response.json();
-        console.log("📩 Respuesta del servidor:", data);
         return data;
         
     } catch (error) {

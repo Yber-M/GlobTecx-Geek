@@ -1,6 +1,9 @@
 import { conexApi } from "./conexApi.js";
 
+//Botones crud
 const agregarBtn = document.querySelector('#agregarBtn');
+const vaciarBtn = document.querySelector('#vaciarBtn');
+
 const formularioProducto = document.querySelector('#formularioProducto');
 const vistaPrevia = document.querySelector('.gestionar__vista');
 
@@ -16,21 +19,18 @@ const urlImagenInput = document.querySelector('#urlImagen');
 
 async function agregarProductos() {
 
-    console.log('Inciando funcionalidad agregar');
     if (!validarCampos()) {
         console.log("❌ Campos incompletos");
         return;
     }    
 
     try {
-        console.log("📡 Obteniendo productos existentes...");
         const productos = await conexApi.listarProductos();
 
         const idDuplicado = productos.some(producto => String(producto.id) === String(idInput.value));
 
         if (idDuplicado) {
-            alert("❌ El ID ingresado ya existe. Por favor, ingrese un ID único.");
-            console.log("❌ ID duplicado encontrado:", idInput.value);
+            alert(`❌ El ID '${idInput}' ya existe. Por favor, ingrese un ID único.`);
             return;
         }
 
@@ -47,24 +47,27 @@ async function agregarProductos() {
             linkProducto: urlProductoInput.value,
         };
 
-        console.log("📦 Enviando producto a la API:", nuevoProducto);
-
-
         // Registrar el producto
         await conexApi.registrarProducto(nuevoProducto);
 
-        console.log("✅ Producto agregado exitosamente");
         alert("✅ Producto agregado exitosamente.");
-        formularioProducto.reset();
-        vistaPrevia.innerHTML = `
-            <img src="../img/Vector.svg" id="vistaPrevia" alt="vistaPrevia"><br>
-            <spam class="vistaPrevia__texto">Vista Previa</spam>`;
-
+        vaciarFormulario();
         location.reload(); // Recargar la página
     } catch (error) {
         console.error("❌ Error al agregar producto:", error);
         alert("❌ Ocurrió un error al agregar el producto. Inténtelo nuevamente.");
     }
+}
+
+function vaciarFormulario() {
+    // Vaciar todos los inputs del formulario
+    formularioProducto.reset();
+
+    // Restablecer la vista previa
+    vistaPrevia.innerHTML = `
+        <img src="../img/Vector.svg" id="vistaPrevia" alt="vistaPrevia"><br>
+        <spam class="vistaPrevia__texto">Vista Previa</spam>
+    `;
 }
 
 function validarCampos() {
