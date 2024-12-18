@@ -42,6 +42,31 @@ async function registrarUsuario(nuevoUsuario) {
     }
 }
 
+async function registrarProducto(producto) {
+    console.log("Enviando POST a la API con producto:", producto);
+    try {
+        const response = await fetch(conexion + '/productos', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(producto),
+        });
+
+        console.log("Respuesta de la API:", response);
+
+        if (!response.ok) {
+            throw new Error('No se pudo registrar el producto');
+        }
+
+        const data = await response.json();
+        console.log("📩 Respuesta del servidor:", data);
+        return data;
+        
+    } catch (error) {
+        console.error('Error al registrar producto', error);
+        throw error;
+    }
+}
+
 async function buscarProductos(palabraClave) {
     try {
         const conex = await fetch(`${conexion}/productos?q=${palabraClave}`);
@@ -62,7 +87,8 @@ export const conexApi = {
     listarProductos,
     obtenerUsuarios,
     registrarUsuario,
-    buscarProductos
+    buscarProductos,
+    registrarProducto
 }
 
 listarProductos();
