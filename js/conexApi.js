@@ -99,13 +99,31 @@ async function buscarProductos(palabraClave) {
     }
 }
 
+async function eliminarProducto(id) {
+    try {
+        const response = await fetch(`${conexion}/productos/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('No se puede eliminar el producto');
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error al eliminar producto:', error);
+        throw error;
+    }
+}
+
 export const conexApi = {
     listarProductos,
     obtenerUsuarios,
     registrarUsuario,
     buscarProductos,
     registrarProducto,
-    actualizarProducto
+    actualizarProducto,
+    eliminarProducto
 }
 
 listarProductos();

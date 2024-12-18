@@ -4,6 +4,7 @@ import { conexApi } from "./conexApi.js";
 const agregarBtn = document.querySelector('#agregarBtn');
 const vaciarBtn = document.querySelector('#vaciarBtn');
 const guardarBtn = document.querySelector('#guardarBtn');
+const eliminarBtn = document.querySelector('#eliminarBtn');
 
 const formularioProducto = document.querySelector('#formularioProducto');
 const vistaPrevia = document.querySelector('.gestionar__vista');
@@ -31,7 +32,7 @@ async function agregarProductos() {
         const idDuplicado = productos.some(producto => String(producto.id) === String(idInput.value));
 
         if (idDuplicado) {
-            alert(`❌ El ID '${idInput}' ya existe. Por favor, ingrese un ID único.`);
+            alert(`❌ El ID '${idInput.value}' ya existe. Por favor, ingrese un ID único.`);
             return;
         }
 
@@ -103,6 +104,33 @@ async function guardarProducto() {
     }
 }
 
+async function eliminarProducto() {
+    if (!idInput.value) {
+        alert("❌ Por favor, selecciona un producto antes de eliminar.");
+        return
+    }
+
+    const confirmacion = confirm(`¿Estás seguro de eliminar el producto con ID ${idInput.value}?`);
+
+    if (!confirmacion) {
+        return;
+    }
+
+    try {
+        await conexApi.eliminarProducto(idInput.value);
+
+        alert("✅ Producto eliminado exitosamente.");
+
+        vaciarFormulario();
+
+        location.reload();
+
+    } catch (error) {
+        console.error("❌ Error al eliminar producto:", error);
+        alert("❌ Ocurrió un error al eliminar el producto. Inténtelo nuevamente.");
+    }
+}
+
 function formatearPrecio(value) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
@@ -145,3 +173,4 @@ function validarCampos() {
 agregarBtn.addEventListener('click', agregarProductos);
 vaciarBtn.addEventListener('click', vaciarFormulario);
 guardarBtn.addEventListener('click', guardarProducto);
+eliminarBtn.addEventListener('click', eliminarProducto);
