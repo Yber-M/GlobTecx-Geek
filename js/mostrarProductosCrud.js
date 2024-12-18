@@ -5,6 +5,7 @@ const listarProductos = document.querySelector('[data-productos]');
 // Seleccionar los inputs del formulario
 const idInput = document.querySelector('#id');
 const tituloInput = document.querySelector('#titulo');
+const marcaInput = document.querySelector('#marca');
 const precioInput = document.querySelector('#precio');
 const descuentoInput = document.querySelector('#descuento');
 const precioFinalInput = document.querySelector('#precioFinal');
@@ -33,6 +34,7 @@ export function crearCard(id, imagen, linkProducto, marca, titulo, precioActual,
         cargarFormulario({
             id,
             titulo,
+            marca,
             precioActual,
             dsct,
             precioAnterior,
@@ -51,6 +53,7 @@ function cargarFormulario(producto) {
 
     idInput.value = producto.id;
     tituloInput.value = producto.titulo;
+    marcaInput.value = producto.marca;
     precioInput.value = precioAnteriorLimpio;
     descuentoInput.value = producto.dsct;
     precioFinalInput.value = precioFinalLimpio;
