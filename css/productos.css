@@ -77,7 +77,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-height: calc(138vh - 150px);
+    max-height: calc(150vh - 140px);
     overflow-y: auto;
     background-color: #fff;
     border-radius: 8px;

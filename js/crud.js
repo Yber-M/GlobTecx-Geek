@@ -34,6 +34,9 @@ async function agregarProductos() {
             return;
         }
 
+        // Formateamos los precios
+        const precioAnteriorFormateado = formatearPrecio(precioInput.value);
+        const precioFinalFormateado = formatearPrecio(precioFinalInput.value);
 
         // Constructor para el nuevo objeto
         const nuevoProducto = {
@@ -41,9 +44,9 @@ async function agregarProductos() {
             imagen: urlImagenInput.value,
             titulo: tituloInput.value,
             marca: marcaInput.value,
-            precioAnterior: precioInput.value,
+            precioAnterior: precioAnteriorFormateado,
             dsct: descuentoInput.value,
-            precioActual: precioFinalInput.value,
+            precioActual: precioFinalFormateado,
             linkProducto: urlProductoInput.value,
         };
 
@@ -57,6 +60,13 @@ async function agregarProductos() {
         console.error("❌ Error al agregar producto:", error);
         alert("❌ Ocurrió un error al agregar el producto. Inténtelo nuevamente.");
     }
+}
+
+function formatearPrecio(value) {
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+    }).format(value);
 }
 
 function vaciarFormulario() {
