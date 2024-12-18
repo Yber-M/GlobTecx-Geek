@@ -41,6 +41,9 @@ export function crearCard(id, imagen, linkProducto, marca, titulo, precioActual,
             imagen,
             linkProducto
         });
+
+        // Inhabilitar inputId
+        idInput.disabled = true;
     });
 
     return producto;

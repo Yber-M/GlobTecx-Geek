@@ -3,6 +3,7 @@ import { conexApi } from "./conexApi.js";
 //Botones crud
 const agregarBtn = document.querySelector('#agregarBtn');
 const vaciarBtn = document.querySelector('#vaciarBtn');
+const guardarBtn = document.querySelector('#guardarBtn');
 
 const formularioProducto = document.querySelector('#formularioProducto');
 const vistaPrevia = document.querySelector('.gestionar__vista');
@@ -62,6 +63,46 @@ async function agregarProductos() {
     }
 }
 
+async function guardarProducto() {
+    if (!validarCampos()) {
+        console.log("❌ Campos incompletos");
+    }
+
+    try {
+        const productos = await conexApi.listarProductos();
+        const productoExistente = productos.find(producto => String(producto.id) === String(idInput.value));
+
+        if (!productoExistente) {
+            alert(`❌ El producto con ID '${idInput.value}' no existe. No se puede guardar.`);
+            return;
+        }
+
+        // Formateamos los precios
+        const precioAnteriorFormateado = formatearPrecio(precioInput.value);
+        const precioFinalFormateado = formatearPrecio(precioFinalInput.value);
+
+        const productoActualizado = {
+            id: productoExistente.id,
+            imagen: urlImagenInput.value,
+            titulo: tituloInput.value,
+            marca: marcaInput.value,
+            precioAnterior: precioAnteriorFormateado,
+            dsct: descuentoInput.value,
+            precioActual: precioFinalFormateado,
+            linkProducto: urlProductoInput.value,
+        };
+
+        await conexApi.actualizarProducto(productoActualizado);
+        alert("✅ Producto actualizado exitosamente.");
+        vaciarFormulario();
+        location.reload();
+
+    } catch (error) {
+        console.error("❌ Error al guardar producto:", error);
+        alert("❌ Ocurrió un error al guardar el producto. Inténtelo nuevamente.");
+    }
+}
+
 function formatearPrecio(value) {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
@@ -78,6 +119,8 @@ function vaciarFormulario() {
         <img src="../img/Vector.svg" id="vistaPrevia" alt="vistaPrevia"><br>
         <spam class="vistaPrevia__texto">Vista Previa</spam>
     `;
+
+    idInput.disabled = false;
 }
 
 function validarCampos() {
@@ -101,3 +144,4 @@ function validarCampos() {
 // Evento para el boton agregar
 agregarBtn.addEventListener('click', agregarProductos);
 vaciarBtn.addEventListener('click', vaciarFormulario);
+guardarBtn.addEventListener('click', guardarProducto);

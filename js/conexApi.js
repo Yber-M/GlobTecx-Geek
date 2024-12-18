@@ -62,6 +62,27 @@ async function registrarProducto(producto) {
     }
 }
 
+async function actualizarProducto(producto) {
+    try {
+        const response = await fetch(`${conexion}/productos/${producto.id}`, {
+            method: 'PUT',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(producto),
+        });
+
+        if (!response.ok) {
+            throw new Error('No se puede actualizar el producto');
+        }
+
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error('Error al actualizar producto:', error);
+        throw error;
+    }
+}
+
 async function buscarProductos(palabraClave) {
     try {
         const conex = await fetch(`${conexion}/productos?q=${palabraClave}`);
@@ -83,7 +104,8 @@ export const conexApi = {
     obtenerUsuarios,
     registrarUsuario,
     buscarProductos,
-    registrarProducto
+    registrarProducto,
+    actualizarProducto
 }
 
 listarProductos();
