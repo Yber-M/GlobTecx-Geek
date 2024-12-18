@@ -22,7 +22,7 @@ async function agregarProductos() {
     if (!validarCampos()) {
         console.log("❌ Campos incompletos");
         return;
-    }    
+    }
 
     try {
         const productos = await conexApi.listarProductos();
@@ -90,3 +90,4 @@ function validarCampos() {
 
 // Evento para el boton agregar
 agregarBtn.addEventListener('click', agregarProductos);
+vaciarBtn.addEventListener('click', vaciarFormulario);
