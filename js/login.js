@@ -75,12 +75,9 @@ async function manejarRegistro(event) {
 
             if (usuarioRegistrar) {
                 usuarioRegistradoText('Registro exitoso!');
-                // Redirigir después de 2 segundos
-                setTimeout(() => {
-                    window.location.href = './login.html';
-                }, 2000);
             }
-        }, 5200); // Tiempo para mostrar el mensaje inicial
+            registerForm.reset();
+        });
     } catch (error) {
         console.log('Error al registrar usuario.', error);
         textErrorRegister('Error al registrarse.');
@@ -110,7 +107,7 @@ function textErrorRegister(cadena) {
 
 function usuarioRegistradoText(cadena) {
     new Typed('#typed-register', {
-        strings: [`${cadena}`, 'Redireccionando al login...'],
+        strings: [`${cadena}`, 'GLOBTECx-'],
         typeSpeed: 45,
         backSpeed: 25,
         cursorChar: '',
