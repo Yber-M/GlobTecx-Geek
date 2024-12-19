@@ -8,7 +8,6 @@ const registerForm = document.querySelector('#registerForm');
 const emailInput = document.querySelector('#email-login');
 const passwordInput = document.querySelector('#password-login');
 
-// Función para iniciar sesión
 async function iniciarSesion(event) {
     event.preventDefault();
     console.log("Formulario de Login enviado, event.preventDefault() ejecutado");
